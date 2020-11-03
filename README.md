@@ -1,2 +1,2 @@
 # sockettool
-socket tool by java
+socket tool by javafx
