@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane fx:id="rootPane" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aini365.ui.controller.TcpClientWindowController">
+    <top>
+        <GridPane prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets>
+                    <top>6</top>
+                </Insets>
+            </padding>
+            <Label fx:id="lblConnectStatus" text="已连接" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <padding>
+                    <Insets>
+                        <left>6</left>
+                    </Insets>
+                </padding>
+            </Label>
+            <Label text="对方IP:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label fx:id="lblRemoteIp" text="127.0.0.1" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <padding>
+                    <Insets>
+                        <left>46</left>
+                    </Insets>
+                </padding>
+            </Label>
+            <Label text="对方端口:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <Label fx:id="lblRemotePort" text="8888" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <padding>
+                    <Insets>
+                        <left>60</left>
+                    </Insets>
+                </padding>
+            </Label>
+            <HBox spacing="6" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                <padding>
+                    <Insets left="6" top="6" />
+                </padding>
+                <Button fx:id="btnStart" onAction="#handleStartButtonAction" text="连接" />
+                <Button fx:id="btnStop" onAction="#handleStopButtonAction" text="断开" />
+            </HBox>
+            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1" >
+                <Label prefWidth="120" text="协议:" AnchorPane.topAnchor="6" />
+                <ComboBox fx:id="selProtocols" AnchorPane.topAnchor="6" AnchorPane.leftAnchor="45">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="无" />
+                            <String fx:value="EZSP" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </AnchorPane>
+
+            <Label text="本地端口:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="lblLocalPort" text="8889" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <padding>
+                    <Insets>
+                        <left>60</left>
+                    </Insets>
+                </padding>
+            </Label>
+            <columnConstraints>
+                <ColumnConstraints prefWidth="160" />
+                <ColumnConstraints prefWidth="160" />
+                <ColumnConstraints prefWidth="160" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+            <items>
+                <AnchorPane>
+                    <TextArea fx:id="txtReceiveData" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                </AnchorPane>
+                <AnchorPane>
+                        <TextArea fx:id="txtSendData" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="0.0" />
+                        <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <Label text="发送协议" AnchorPane.rightAnchor="68.0" AnchorPane.topAnchor="6.0">
+                            </Label>
+                            <ComboBox fx:id="selSendProtocol" prefWidth="110" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="26.0">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Common" />
+                                        <String fx:value="EZSP" />
+                                    </FXCollections>
+                                </items>
+                            </ComboBox>
+                            <Button fx:id="btnSendData" onAction="#handleSendDataButtonAction" prefWidth="110" text="发送数据" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="56.0">
+                            </Button>
+
+                            <Label text="重复发送次数" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="100.0">
+                            </Label>
+                            <ComboBox fx:id="selTimes" prefWidth="110" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="120.0">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="10" />
+                                        <String fx:value="100" />
+                                        <String fx:value="1000" />
+                                        <String fx:value="10000" />
+                                    </FXCollections>
+                                </items>
+                            </ComboBox>
+                            <Label AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="160.0">间隔</Label>
+                            <TextField fx:id="txtSendInterval" prefWidth="60" text="1000" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="156.0" />
+                            <Label AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="160.0">ms</Label>
+                            <Button fx:id="btnStartRepeatSend" onAction="#handleStartRepeatSendDataButtonAction" prefWidth="110" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="190.0">定时发送</Button>
+                            <Button fx:id="btnStopRepeatSend" onAction="#handleStopRepeatSendDataButtonAction" prefWidth="110" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="220.0">停止定时发送</Button>
+
+                        </AnchorPane>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </center>
+    <bottom>
+        <AnchorPane>
+            <CheckBox fx:id="chkFormat" selected="true" AnchorPane.leftAnchor="6.0">十六进制格式</CheckBox>
+            <Button fx:id="btnClearCount" onAction="#handleClearCountButtonAction" AnchorPane.rightAnchor="230.0">统计清零</Button>
+            <Label AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="190.0">收:</Label>
+            <Label fx:id="lblTotalReceiveBytes" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="140.0">0</Label>
+            <Label AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="95.0">字节 发:</Label>
+            <Label fx:id="lblTotalSendBytes" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="30.0">0</Label>
+            <Label AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="5.0">字节</Label>
+        </AnchorPane>
+    </bottom>
+</BorderPane>
