@@ -11,7 +11,8 @@ SocketTool是一款使用javafx编写的跨平台的socket工具。作者一直�
 + 支持ezsp串口协议解析
 
 
-#开发
+# 开发
 如果发现程序bug或者有好的建议，欢迎加入一块优化。
 
-License
+# License
+[Apache-2.0 License](https://github.com/aini365/sockettool/blob/main/LICENSE)
